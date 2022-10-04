@@ -57,7 +57,6 @@ ProductModel dataProduct() {
           name3: "",
           name4: "",
           name5: "",
-          isstock: true,
           optiondetails: [
             ProductOptionDetailModel(
                 optiondetailcode: "G12",
@@ -166,7 +165,6 @@ ProductModel dataProduct() {
           name3: "",
           name4: "",
           name5: "",
-          isstock: true,
           optiondetails: [
             ProductOptionDetailModel(
                 optiondetailcode: "S11",
@@ -218,7 +216,6 @@ ProductModel dataProduct() {
           name3: "",
           name4: "",
           name5: "",
-          isstock: true,
           optiondetails: [
             ProductOptionDetailModel(
                 optiondetailcode: "S111",
@@ -245,13 +242,12 @@ ProductModel dataProduct() {
           required: true,
           choicetype: 0,
           maxselect: 1,
-          isstockcontrol: true,
+          isstockcontrol: false,
           name1: "ลายปักเพิ่ม แถม",
           name2: "Extra",
           name3: "",
           name4: "",
           name5: "",
-          isstock: false,
           optiondetails: [
             ProductOptionDetailModel(
                 optiondetailcode: "W111",
@@ -287,13 +283,12 @@ ProductModel dataProduct() {
           required: true,
           choicetype: 0,
           maxselect: 1,
-          isstockcontrol: true,
+          isstockcontrol: false,
           name1: "กระเป๋า คิดเงินเพิ่ม",
           name2: "Extra",
           name3: "",
           name4: "",
           name5: "",
-          isstock: false,
           optiondetails: [
             ProductOptionDetailModel(
                 optiondetailcode: "Q111",
@@ -314,6 +309,128 @@ ProductModel dataProduct() {
                 name5: "",
                 choicedetails: []),
           ])
+    ],
+    availablepatternoptions: [
+      AvailablePatternOptions(
+          patternkey: "G12:S11:S111",
+          optionpatterntags: ["G12", "S11", "S111"],
+          qty: 88,
+          price: 11.11),
+      AvailablePatternOptions(
+          patternkey: "G12:S11:S112",
+          optionpatterntags: ["G12", "S11", "S112"],
+          qty: 0,
+          price: 12),
+      AvailablePatternOptions(
+          patternkey: "G12:S12:S111",
+          optionpatterntags: ["G12", "S12", "S111"],
+          qty: 0,
+          price: 13),
+      AvailablePatternOptions(
+          patternkey: "G12:S12:S112",
+          optionpatterntags: ["G12", "S12", "S112"],
+          qty: 10,
+          price: 14),
+      AvailablePatternOptions(
+          patternkey: "G12:S13:S111",
+          optionpatterntags: ["G12", "S13", "S111"],
+          qty: 5,
+          price: 14),
+      AvailablePatternOptions(
+          patternkey: "G12:S13:S112",
+          optionpatterntags: ["G12", "S13", "S112"],
+          qty: 5,
+          price: 14),
+      AvailablePatternOptions(
+          patternkey: "G12:S14:S111",
+          optionpatterntags: ["G12", "S14", "S111"],
+          qty: 5,
+          price: 14),
+      AvailablePatternOptions(
+          patternkey: "G12:S14:S112",
+          optionpatterntags: ["G12", "S14", "S112"],
+          qty: 5,
+          price: 14),
+      AvailablePatternOptions(
+          patternkey: "G13:S11:S111",
+          optionpatterntags: ["G13", "S11", "S111"],
+          qty: 88,
+          price: 11.11),
+      AvailablePatternOptions(
+          patternkey: "G13:S11:S112",
+          optionpatterntags: ["G13", "S11", "S112"],
+          qty: 0,
+          price: 12),
+      AvailablePatternOptions(
+          patternkey: "G13:S12:S111",
+          optionpatterntags: ["G13", "S12", "S111"],
+          qty: 0,
+          price: 13),
+      AvailablePatternOptions(
+          patternkey: "G13:S12:S112",
+          optionpatterntags: ["G13", "S12", "S112"],
+          qty: 10,
+          price: 14),
+      AvailablePatternOptions(
+          patternkey: "G13:S13:S111",
+          optionpatterntags: ["G13", "S13", "S111"],
+          qty: 5,
+          price: 14),
+      AvailablePatternOptions(
+          patternkey: "G13:S13:S112",
+          optionpatterntags: ["G13", "S13", "S112"],
+          qty: 5,
+          price: 14),
+      AvailablePatternOptions(
+          patternkey: "G13:S14:S111",
+          optionpatterntags: ["G13", "S14", "S111"],
+          qty: 5,
+          price: 14),
+      AvailablePatternOptions(
+          patternkey: "G13:S14:S112",
+          optionpatterntags: ["G13", "S14", "S112"],
+          qty: 5,
+          price: 14),
+      AvailablePatternOptions(
+          patternkey: "G14:S11:S111",
+          optionpatterntags: ["G14", "S11", "S111"],
+          qty: 88,
+          price: 11.11),
+      AvailablePatternOptions(
+          patternkey: "G14:S11:S112",
+          optionpatterntags: ["G14", "S11", "S112"],
+          qty: 0,
+          price: 12),
+      AvailablePatternOptions(
+          patternkey: "G14:S12:S111",
+          optionpatterntags: ["G14", "S12", "S111"],
+          qty: 0,
+          price: 13),
+      AvailablePatternOptions(
+          patternkey: "G14:S12:S112",
+          optionpatterntags: ["G14", "S12", "S112"],
+          qty: 10,
+          price: 14),
+      AvailablePatternOptions(
+          patternkey: "G14:S13:S111",
+          optionpatterntags: ["G14", "S13", "S111"],
+          qty: 5,
+          price: 14),
+      AvailablePatternOptions(
+          patternkey: "G14:S13:S112",
+          optionpatterntags: ["G14", "S13", "S112"],
+          qty: 5,
+          price: 14),
+      AvailablePatternOptions(
+          patternkey: "G14:S14:S111",
+          optionpatterntags: ["G14", "S14", "S111"],
+          qty: 5,
+          price: 14),
+      AvailablePatternOptions(
+          patternkey: "G14:S14:S112",
+          optionpatterntags: ["G14", "S14", "S112"],
+          qty: 5,
+          price: 14),
     ],
     unitcode: "U01",
     unit: UnitModel(

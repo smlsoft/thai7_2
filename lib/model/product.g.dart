@@ -50,6 +50,11 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
       options: (json['options'] as List<dynamic>)
           .map((e) => ProductOptionModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      availablepatternoptions:
+          (json['availablepatternoptions'] as List<dynamic>)
+              .map((e) =>
+                  AvailablePatternOptions.fromJson(e as Map<String, dynamic>))
+              .toList(),
       unituses: (json['unituses'] as List<dynamic>)
           .map((e) => ProductUnitModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -100,6 +105,7 @@ Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
       'description4': instance.description4,
       'description5': instance.description5,
       'options': instance.options,
+      'availablepatternoptions': instance.availablepatternoptions,
       'orderminimum': instance.orderminimum,
     };
 
@@ -116,7 +122,6 @@ ProductOptionModel _$ProductOptionModelFromJson(Map<String, dynamic> json) =>
       name3: json['name3'] as String,
       name4: json['name4'] as String,
       name5: json['name5'] as String,
-      isstock: json['isstock'] as bool,
       optiondetails: (json['optiondetails'] as List<dynamic>)
           .map((e) =>
               ProductOptionDetailModel.fromJson(e as Map<String, dynamic>))
@@ -136,7 +141,6 @@ Map<String, dynamic> _$ProductOptionModelToJson(ProductOptionModel instance) =>
       'name3': instance.name3,
       'name4': instance.name4,
       'name5': instance.name5,
-      'isstock': instance.isstock,
       'optiondetails': instance.optiondetails,
     };
 
@@ -186,6 +190,26 @@ Map<String, dynamic> _$ProductOptionDetailModelToJson(
       'name5': instance.name5,
       'image': instance.image,
       'choicedetails': instance.choicedetails,
+    };
+
+AvailablePatternOptions _$AvailablePatternOptionsFromJson(
+        Map<String, dynamic> json) =>
+    AvailablePatternOptions(
+      patternkey: json['patternkey'] as String,
+      qty: json['qty'] as int,
+      price: (json['price'] as num).toDouble(),
+      optionpatterntags: (json['optionpatterntags'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+    );
+
+Map<String, dynamic> _$AvailablePatternOptionsToJson(
+        AvailablePatternOptions instance) =>
+    <String, dynamic>{
+      'patternkey': instance.patternkey,
+      'qty': instance.qty,
+      'price': instance.price,
+      'optionpatterntags': instance.optionpatterntags,
     };
 
 ProductUnitModel _$ProductUnitModelFromJson(Map<String, dynamic> json) =>

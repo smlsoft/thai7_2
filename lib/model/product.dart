@@ -59,6 +59,7 @@ class ProductModel {
   final String description4;
   final String description5;
   final List<ProductOptionModel> options;
+  final List<AvailablePatternOptions> availablepatternoptions;
   final double orderminimum;
 
   ProductModel(
@@ -83,6 +84,7 @@ class ProductModel {
       required this.recommended,
       required this.havepoint,
       required this.options,
+      required this.availablepatternoptions,
       required this.unituses,
       required this.starpersent,
       required this.ordercount,
@@ -114,7 +116,7 @@ class ProductOptionModel {
   final String name3;
   final String name4;
   final String name5;
-  final bool isstock;
+
   final List<ProductOptionDetailModel> optiondetails;
 
   ProductOptionModel({
@@ -129,7 +131,6 @@ class ProductOptionModel {
     required this.name3,
     required this.name4,
     required this.name5,
-    required this.isstock,
     required this.optiondetails,
   });
 
@@ -185,6 +186,25 @@ class ProductOptionDetailModel {
   factory ProductOptionDetailModel.fromJson(Map<String, dynamic> json) =>
       _$ProductOptionDetailModelFromJson(json);
   Map<String, dynamic> toJson() => _$ProductOptionDetailModelToJson(this);
+}
+
+@JsonSerializable()
+class AvailablePatternOptions {
+  final String patternkey;
+  final int qty;
+  final double price;
+  final List<String> optionpatterntags;
+
+  AvailablePatternOptions({
+    required this.patternkey,
+    required this.qty,
+    required this.price,
+    required this.optionpatterntags,
+  });
+
+  factory AvailablePatternOptions.fromJson(Map<String, dynamic> json) =>
+      _$AvailablePatternOptionsFromJson(json);
+  Map<String, dynamic> toJson() => _$AvailablePatternOptionsToJson(this);
 }
 
 @JsonSerializable()

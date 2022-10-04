@@ -61,7 +61,7 @@ class _OrderScreenState extends State<OrderScreen>
       for (int j = 0; j < product.options[i].optiondetails.length; j++) {
         int foundIndex = -1;
         for (int k = 0; k < includes.length; k++) {
-          log(includes[k].optionguid);
+          //log(includes[k].optionguid);
           if (product.options[i].optiondetails[j].optiondetailcode ==
               includes[k].optionguid) {
             foundIndex = k;
@@ -89,7 +89,7 @@ class _OrderScreenState extends State<OrderScreen>
 
   void optionsProcess(
       int optionRowIndex, List<ProductOptionDetailIncludeModel> includes) {
-    log(includes.length.toString());
+    //log(includes.length.toString());
 
     for (int i = optionRowIndex + 1; i < product.options.length; i++) {
       for (int j = 0; j < product.options[i].optiondetails.length; j++) {
@@ -112,7 +112,7 @@ class _OrderScreenState extends State<OrderScreen>
     List<Widget> widget = [];
     List<Widget> imageOptions = [];
     List<Widget> textOptions = [];
-
+    List<String> selectValue = [];
     imageOptions.clear();
     List<ProductOptionModel> arrOptionMaster = [];
     List<String> arrOption = [];
@@ -129,6 +129,11 @@ class _OrderScreenState extends State<OrderScreen>
           textOptions.add(const SizedBox(
             width: 10,
           ));
+          if (product.options[i].isstockcontrol) {
+            selectValue
+                .add(product.options[i].optiondetails[j].optiondetailcode);
+          }
+
           if (product.options[i].optiondetails[j].image.isNotEmpty) {
             imageOptions.add(OutlinedButton(
                 style: OutlinedButton.styleFrom(
@@ -136,30 +141,71 @@ class _OrderScreenState extends State<OrderScreen>
                     side: BorderSide(
                         width: 2.0,
                         color: (product.options[i].optiondetails[j].selected)
-                            ? Colors.orange
+                            ? Colors.white
                             : Colors.grey.shade300),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(0))),
                 onPressed: () {
                   setState(() {});
                 },
-                child: SizedBox(
-                    width: 75,
-                    height: 75,
-                    child: CachedNetworkImage(
-                      fit: BoxFit.fill,
-                      progressIndicatorBuilder: (context, url, progress) =>
-                          Center(
-                        child: CircularProgressIndicator(
-                          value: progress.progress,
+                child: Container(
+                  margin: const EdgeInsets.only(right: 3, left: 3),
+                  child: SizedBox(
+                      width: 75,
+                      height: 75,
+                      child: CachedNetworkImage(
+                        fit: BoxFit.fill,
+                        progressIndicatorBuilder: (context, url, progress) =>
+                            Center(
+                          child: CircularProgressIndicator(
+                            value: progress.progress,
+                          ),
                         ),
-                      ),
-                      imageUrl: product.options[i].optiondetails[j].image,
-                    ))));
+                        imageUrl: product.options[i].optiondetails[j].image,
+                      )),
+                )));
           }
         }
       }
     }
+
+    print(selectValue);
+    if (product.availablepatternoptions.length > 0) {
+      if (selectValue.length ==
+          product.availablepatternoptions[0].optionpatterntags.length) {
+        String selectString = "";
+        for (int i = 0; i < selectValue.length; i++) {
+          if (i == 0) {
+            selectString += selectValue[i];
+          } else {
+            selectString += ":" + selectValue[i];
+          }
+        }
+        print(selectString);
+        AvailablePatternOptions dataStock = product.availablepatternoptions
+            .firstWhere((ele) => ele.patternkey == selectString,
+                orElse: () => AvailablePatternOptions(
+                    patternkey: "", qty: 0, price: 0, optionpatterntags: []));
+
+        if (dataStock.patternkey != "") {
+          setState(() {
+            if (product.unituses.length > 1) {
+              balanceQty =
+                  dataStock.qty.toString() + " " + product.unit.unitname1;
+            } else {
+              balanceQty =
+                  dataStock.qty.toString() + " " + product.unit.unitname1;
+            }
+            print(balanceQty);
+          });
+        }
+      } else {
+        setState(() {
+          balanceQty = "";
+        });
+      }
+    }
+
     if (imageOptions.isNotEmpty || textOptions.isNotEmpty) {
       widget.add(Container(
           width: double.infinity,
@@ -187,12 +233,12 @@ class _OrderScreenState extends State<OrderScreen>
             style: OutlinedButton.styleFrom(
                 backgroundColor: (product.options[i].optiondetails[j].isenable)
                     ? Colors.white
-                    : Colors.red,
+                    : Colors.grey.shade300,
                 padding: const EdgeInsets.all(0),
                 side: BorderSide(
                     width: 2.0,
                     color: (product.options[i].optiondetails[j].selected)
-                        ? Colors.orange
+                        ? Colors.orange.shade300
                         : Colors.grey.shade300),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(0))),
@@ -224,9 +270,12 @@ class _OrderScreenState extends State<OrderScreen>
               });
             },
             child: (product.options[i].optiondetails[j].image.isEmpty)
-                ? Text(product.options[i].optiondetails[j].name1 +
-                    " " +
-                    product.options[i].optiondetails[j].optiondetailcode)
+                ? Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(product.options[i].optiondetails[j].name1 +
+                        " " +
+                        product.options[i].optiondetails[j].optiondetailcode),
+                  )
                 : Column(children: [
                     SizedBox(
                         width: 75,
@@ -241,16 +290,22 @@ class _OrderScreenState extends State<OrderScreen>
                           ),
                           imageUrl: product.options[i].optiondetails[j].image,
                         )),
-                    Text(product.options[i].optiondetails[j].name1 +
-                        " " +
-                        product.options[i].optiondetails[j].optiondetailcode)
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Text(product.options[i].optiondetails[j].name1 +
+                          " " +
+                          product.options[i].optiondetails[j].optiondetailcode),
+                    )
                   ])));
       }
-      widget.add(Row(
-        children: [
-          Expanded(flex: 1, child: Text(product.options[i].name1)),
-          Expanded(flex: 3, child: Wrap(spacing: 7, children: details))
-        ],
+      widget.add(Container(
+        margin: EdgeInsets.only(top: 5),
+        child: Row(
+          children: [
+            Expanded(flex: 1, child: Text(product.options[i].name1)),
+            Expanded(flex: 3, child: Wrap(spacing: 7, children: details))
+          ],
+        ),
       ));
     }
     return Padding(
@@ -262,23 +317,18 @@ class _OrderScreenState extends State<OrderScreen>
 
   Widget packings() {
     List<Widget> widget = [];
-    if (product.unituses.length > 1) {
-      balanceQty = "15 โหล x 8 ชิ้น";
-    } else {
-      balanceQty = "8 ชิ้น";
+    if (balanceQty != "") {
+      widget.add(Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.blueAccent),
+          ),
+          width: double.infinity,
+          child: Row(children: [
+            const Expanded(child: Text("ยอดคงเหลือ")),
+            Text(balanceQty)
+          ])));
     }
-
-    widget.add(Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.blueAccent),
-        ),
-        width: double.infinity,
-        child: Row(children: [
-          const Expanded(child: Text("ยอดคงเหลือ")),
-          Text(balanceQty)
-        ])));
-
     for (int index = 0; index < product.unituses.length; index++) {
       String unitCode = product.unituses[index].unitcode;
       String unitName = findUnitName(unitCode);
